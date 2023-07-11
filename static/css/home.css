@@ -1,0 +1,87 @@
+.carousel-caption{
+    background-color: rgba(33, 37, 41, 0.3);
+    border-radius: 25px / 10px;
+    backdrop-filter: blur(5px);
+    right: 10%;
+    left: 10%; 
+    transform: translateY(150px);
+}
+.carousel-inner .active .carousel-caption{
+    transform: translateY(-10px);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.carousel-caption p{
+    color: rgb(228, 228, 228)
+}
+.carousel-control-next:hover > .carousel-control-next-icon, .carousel-control-prev:hover > .carousel-control-prev-icon{
+    width: 30%;
+    height: 10%;
+    transition: 0.3s;
+}
+.carousel-inner a:hover .carousel-caption{
+    right: 9%;
+    left: 9%;
+    height: 28%;
+    backdrop-filter: blur(12px);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.carousel-item{
+    height: 450px;
+}
+.category-title{
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.card-img-overlay h4{
+    color: black;
+}
+.card-img-overlay{
+
+    align-items: flex-end;
+}
+.SubCategory-card-link {
+    text-decoration: none;
+    color: var(--bs-card-title-color);
+}
+@media only screen and (max-width: 992px) {
+    .carousel-item{
+        height: 380px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .carousel-item{
+        height: 300px;
+    }
+    .carousel-inner .active .carousel-caption{
+        display: inline!important;
+        transform: translateY(-10px);
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .carousel-inner a:hover .carousel-caption{
+        right: 9%;
+        left: 9%;
+        height: auto;
+        backdrop-filter: blur(12px);
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+}
+@media only screen and (max-width: 576px) {
+    .carousel-item{
+        height: 250px;
+    }
+    .carousel-inner .active .carousel-caption{
+        transform: translateY(0px);
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+}
+@media only screen and (max-width: 500px) {
+    .carousel-item{
+        height: 150px;
+    }
+    .carousel-inner .active .carousel-caption{
+        transform: translateY(10px);
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock css %}
+{% block home-active %}active{% endblock home-active %}
+{% block content %}
+<div class="row justify-content-center" style="margin-bottom: 20px">
+  <div id="carouselExampleCaptions" class="col-xl-10 carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      {% for item in object_list %}
+      <button type="button" data-bs-target="#carouselExampleCaptions" {% if forloop.counter == 1 %} class="active" {% endif %}
+        data-bs-slide-to="{{ forloop.counter0 }}" aria-label="Slide {{ forloop.counter }}"></button>
+      {% endfor %}
+    </div>
+
+    <div class="carousel-inner">
+      {% for item in object_list %}
+      <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %}" data-bs-interval="4000">
+        <img src="{{ item.photo.url }}" class="d-block w-100" alt="...">
+        <a href="{% url 'products' %}?maincategory={{ item.pk }}">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ item.title }}</h5>
+            <p>{{ item.description }}</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<div class="container-flush">
+  {% for item in object_list %}
+  <div class="row">
+      <h5 class="category-title">{{ item.title }} </h5>
+      {% if item.SubCategory.all %}
+      {% for item1 in item.SubCategory.all %}
+      <div class="col-3">
+          <a href="{% url 'products' %}?subcategory={{ item1.pk }}" class="SubCategory-card-link">
+          <div class="card mb-4 text-center">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="{{ item1.photo.url }}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <h5 class="card-title">{{ item1.title}}</h5>
+                  <p class="card-text">{{ item1.description }}</p>
+                  {% comment %} <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> {% endcomment %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Kategoriyalar mavjud emas</p>
+        {% endif %}
+
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

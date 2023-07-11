@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'products' %}?maincategory={{ object.category.sub_category.main_category.pk }}">{{ object.category.sub_category.main_category }}</a></li>
+      {% if object.category.sub_category %}
+        <li class="breadcrumb-item"><a href="{% url 'products' %}?subcategory={{ object.category.sub_category.pk }}">{{ object.category.sub_category }}</a></li>
+      {% endif %}
+      <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{ object.category.pk }}">{{ object.category }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ object.title }}</li>
+    </ol>
+  </nav>
+<div class="row">
+    <div class="col-md-4"><img src="{{ object.photo.url }}" style="width: 100%" alt="{{ item.title }}"></div>
+    <div class="col">
+        <h3>{{ object.title }}</h3>
+        <p>{{ object.body }}</p><br>
+        <p>{{ object.sold_count }} ta sotildi</p>
+        <p>
+            {{ object.raiting }}
+            <svg class="bi my-1" style="width: 20px; height: 20px">
+                <use href="#star"></use>
+            </svg>
+        </p><br>
+        <h5 id="price">{{ object.price }} so'm</h5>
+        <form method="POST"> {% csrf_token %}
+        <div class="row">
+                <div class="input-group mb-12 col-1" style="width: 140px;">
+                    <button class="btn btn-outline-danger" type="button" id="button-addon1"
+                        onclick="decCount()">-</button>
+                    <input type="text" class="form-control" name="product_counter" id="product_counter" value="1" min="1">
+                    <button class="btn btn-outline-success" type="button" id="button-addon1"
+                        onclick="incCount()">+</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-primary" type="sumbit" id="add_to_cart">Savatga Qo'shish</button>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+    <div class="col-sm-2 col-tags">
+        {% for item in object.tags.all %}
+        <span class="badge rounded-pill text-bg-secondary">{{ item.title }}</span>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+{% block javascript %}
+<script>
+    function calcPrice(){
+        document.getElementById('price').innerHTML = parseFloat("{{ object.price }}") * parseInt(document.getElementById('product_counter').value) + " so'm"
+    }
+    function incCount(){
+        document.getElementById('product_counter').value = parseInt(document.getElementById('product_counter').value) + 1
+        calcPrice()
+    }
+    function decCount(){
+        if (document.getElementById('product_counter').value != '1') { document.getElementById('product_counter').value = parseInt(document.getElementById('product_counter').value) - 1}
+        calcPrice()
+    }
+</script>
+{% endblock javascript %}

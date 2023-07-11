@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        {% for obj in object_list %}
+        <div class="card"  style="max-height: 150px;">
+        {% comment %} <div class="card mb-12" style="max-width: 540px;"> {% endcomment %}
+            <div class="row g-0">
+              <div class="col-2">
+                <img src="{{ obj.Product.photo.url }}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <h5 class="card-title">{{ obj.Product.title }}</h5>
+                  <p class="card-text">{{ obj.Product.summary }}</p>
+                  <p class="card-text">
+                    <small class="text-muted">{{ obj.date }} | 
+                      {% if obj.status == "Qabul qilingan" %}
+                      <span class="badge text-bg-primary">
+                      {% elif obj.status == "Yo'lda" %}
+                      <span class="badge text-bg-info">
+                      {% elif obj.status == "Yetkazilgan" %}
+                      <span class="badge text-bg-success">
+                      {% elif obj.status == "Tasdiqlanmagan" %}
+                      <span class="badge text-bg-warning">
+                      {% else %}
+                      <span class="badge text-bg-danger">
+                      {% endif %}
+                        {{ obj.status }}
+                      </span>
+                    </small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+

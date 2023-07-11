@@ -1,0 +1,25 @@
+.card:hover{
+    position: relative;
+    margin-top: -10px;
+    height: 105%;
+    z-index: 2;
+}
+.card-body .card-text{
+    height: 100px;
+}
+.card-img-top{
+    height: 270px;
+    width: auto;
+}
+[data-bs-theme=dark] .list-dark > li{
+    background-color: #212529; 
+    color: #d6eeff;
+    color: white;
+    transition: .2s;
+}
+.accordion-collapse > .list-group{
+    margin-left: 10px;
+}
+#accordionFlushSub .accordion-button:not(.collapsed) {
+    background-color: #00274e;
+}
